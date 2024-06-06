@@ -15,3 +15,7 @@
 2. npm install package --save == yarn add package
 3. npm install package --save-dev == yarn add package --dev
    `npx` comes under the npm and npx actually installs the package and executes and delete the package from the disk
+
+### Component
+
+A component is pretty much a self contained piece of code that returns some visual UI representation
