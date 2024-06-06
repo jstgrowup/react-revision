@@ -1,10 +1,26 @@
+import { Component } from "react";
 import "./App.css";
-function App() {
-  return (
-    <>
-      <h1>Heloo</h1>
-    </>
-  );
+class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      name: "subham",
+    };
+  }
+  render() {
+    return (
+      <>
+        <h1>Hi {this.state.name}</h1>
+        <button
+          onClick={() => {
+            this.setState({ name: "say" });
+          }}
+        >
+          Change Name
+        </button>
+      </>
+    );
+  }
 }
 
 export default App;
