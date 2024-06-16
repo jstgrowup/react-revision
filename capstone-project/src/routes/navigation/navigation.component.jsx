@@ -8,9 +8,12 @@ const Navigation = () => {
         <Link className="logo-container" to="/">
           <img src="/crown.svg" alt="" className="logo" />
         </Link>
-        <div className="links-container">
+        <div className="nav-links-container">
           <Link className="nav-link" to="/shop">
             SHOP
+          </Link>
+          <Link className="nav-link" to="/signin">
+            SIGN IN
           </Link>
         </div>
       </div>
