@@ -11,6 +11,8 @@ const defaultFormFields = {
   password: "",
   confirmPassword: "",
 };
+import "./sign-up-form.component.scss";
+import Button from "../button/button.component";
 const SignUpForm = () => {
   const [formFields, setformFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
@@ -45,8 +47,9 @@ const SignUpForm = () => {
   };
   return (
     <>
-      <div>
-        <h1>Signup with your email and password</h1>
+      <div className="sign-up-container">
+        <h2>Dont have an account?</h2>
+        <span>Signup with your email and password</span>
         <form action="" onSubmit={handleSubmit}>
           <FormInput
             label={"Display Name"}
@@ -83,7 +86,7 @@ const SignUpForm = () => {
             name="confirmPassword"
             value={confirmPassword}
           />
-          <button type="submit">Sign Up</button>
+          <Button type="submit">Sign Up</Button>
         </form>
       </div>
     </>
