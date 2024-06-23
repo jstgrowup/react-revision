@@ -2,6 +2,8 @@ import { useState } from "react";
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
+  signInAuthUserWithEmailAndPassword,
+  signInWithGooglePopup,
 } from "../../utils/firebase/firebase.utils";
 import FormInput from "../form-input/form-input.component";
 
@@ -9,9 +11,13 @@ const defaultFormFields = {
   email: "",
   password: "",
 };
-import "./sign-up-form.component.scss";
+import "./sign-in-form.component.scss";
 import Button from "../button/button.component";
 const SignInForm = () => {
+  const signInWithGoogle = async () => {
+    const { user } = await signInWithGooglePopup();
+    await createUserDocumentFromAuth(user);
+  };
   const [formFields, setformFields] = useState(defaultFormFields);
   const { email, password } = formFields;
   const handleChange = (event) => {
@@ -23,24 +29,28 @@ const SignInForm = () => {
   };
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (confirmPassword !== password) {
-      alert("Password do not match");
-      return;
-    }
+
     try {
+      await signInAuthUserWithEmailAndPassword(email, password);
+
       resetFormFields();
     } catch (error) {
-      if (error.code === "auth/email-already-in-use") {
-        alert("cannot create user , email already used");
-      } else {
-        console.log("error:", error);
+      console.log("error:", error);
+      switch (error.code) {
+        case "auth/invalid-credential":
+          alert("incorrect password");
+          break;
+        case "auth/invalid-credential":
+          alert("incorrect password");
+          break;
+        default:
+          break;
       }
-      return;
     }
   };
   return (
     <>
-      <div className="sign-up-container">
+      <div className="sign-in-container">
         <h2>Already have an account?</h2>
         <span>Signin with your email and password</span>
         <form action="" onSubmit={handleSubmit}>
@@ -61,8 +71,16 @@ const SignInForm = () => {
             name="password"
             value={password}
           />
-
-          <Button type="submit">Sign Up</Button>
+          <div className="buttons-container">
+            <Button type="submit">Sign In</Button>
+            <Button
+              type="button"
+              buttonType={"google"}
+              onClick={signInWithGoogle}
+            >
+              Google Sign In
+            </Button>
+          </div>
         </form>
       </div>
     </>
