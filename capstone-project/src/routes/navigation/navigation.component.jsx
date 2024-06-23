@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Outlet, Link } from "react-router-dom";
 import "./navigation.component.scss";
+import { UserContext } from "../../context/user.context";
 const Navigation = () => {
+  const { currentUser } = useContext(UserContext);
+  console.log("currentUser:", currentUser);
   return (
     <>
       <div className="navigation">
@@ -15,6 +18,13 @@ const Navigation = () => {
           <Link className="nav-link" to="/auth">
             SIGN IN
           </Link>
+          {currentUser ? (
+            <span className="nav-link">SIGN OUT</span>
+          ) : (
+            <Link className="nav-link" to="/auth">
+              SIGN IN
+            </Link>
+          )}
         </div>
       </div>
       <Outlet />
