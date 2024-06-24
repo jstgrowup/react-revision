@@ -3,6 +3,7 @@ import { Outlet, Link } from "react-router-dom";
 import "./navigation.component.scss";
 import { UserContext } from "../../context/user.context";
 import { signOutUser } from "../../utils/firebase/firebase.utils";
+import CartIcon from "../../components/cart-icon/cart-icon.component";
 const Navigation = () => {
   const { currentUser } = useContext(UserContext);
   const signOutHandler = async () => {
@@ -28,6 +29,7 @@ const Navigation = () => {
               SIGN IN
             </Link>
           )}
+          <CartIcon />
         </div>
       </div>
       <Outlet />
