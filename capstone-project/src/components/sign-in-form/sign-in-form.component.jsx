@@ -13,13 +13,10 @@ const defaultFormFields = {
 };
 import "./sign-in-form.component.scss";
 import Button from "../button/button.component";
-import { UserContext } from "../../context/user.context";
+
 const SignInForm = () => {
-  const { setcurrentUser } = useContext(UserContext);
   const signInWithGoogle = async () => {
-    const { user } = await signInWithGooglePopup();
-    setcurrentUser(user);
-    await createUserDocumentFromAuth(user);
+    return await signInWithGooglePopup();
   };
   const [formFields, setformFields] = useState(defaultFormFields);
   const { email, password } = formFields;
@@ -38,7 +35,7 @@ const SignInForm = () => {
         email,
         password
       );
-      setcurrentUser(user);
+
       resetFormFields();
     } catch (error) {
       console.log("error:", error);
