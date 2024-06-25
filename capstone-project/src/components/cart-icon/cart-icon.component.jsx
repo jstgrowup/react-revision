@@ -5,8 +5,8 @@ import { FaCartShopping } from "react-icons/fa6";
 const CartIcon = () => {
   return (
     <div className="cart-icon-container">
-      <FaCartShopping className="shopping-icon" />
       <span className="item-count">0</span>
+      <FaCartShopping className="shopping-icon" />
     </div>
   );
 };
