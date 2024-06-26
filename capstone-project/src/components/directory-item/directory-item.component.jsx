@@ -1,7 +1,7 @@
-import "./category-item.component.scss";
+import "./directory-item.component.scss";
 import React from "react";
 
-const CategoryItem = ({ category }) => {
+const DirectoryItem = ({ category }) => {
   return (
     <div key={category.id} className="category-container">
       <div
@@ -18,4 +18,4 @@ const CategoryItem = ({ category }) => {
   );
 };
 
-export default CategoryItem;
+export default DirectoryItem;
