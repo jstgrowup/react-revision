@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
@@ -11,8 +11,9 @@ const defaultFormFields = {
   password: "",
   confirmPassword: "",
 };
-import "./sign-up-form.component.scss";
+
 import Button from "../button/button.component";
+import { SignUpContainer, SignupHeader } from "./sign-up-form.styles.jsx";
 
 const SignUpForm = () => {
   const [formFields, setformFields] = useState(defaultFormFields);
@@ -48,8 +49,8 @@ const SignUpForm = () => {
   };
   return (
     <>
-      <div className="sign-up-container">
-        <h2>Dont have an account?</h2>
+      <SignUpContainer>
+        <SignupHeader>Dont have an account?</SignupHeader>
         <span>Signup with your email and password</span>
         <form action="" onSubmit={handleSubmit}>
           <FormInput
@@ -89,7 +90,7 @@ const SignUpForm = () => {
           />
           <Button type="submit">Sign Up</Button>
         </form>
-      </div>
+      </SignUpContainer>
     </>
   );
 };

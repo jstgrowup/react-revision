@@ -1,45 +1,43 @@
-import React, { useContext } from "react";
-import { Outlet, Link } from "react-router-dom";
-import "./navigation.component.scss";
-import { UserContext } from "../../context/user.context";
-import { signOutUser } from "../../utils/firebase/firebase.utils";
+import { Fragment, useContext } from "react";
+import { Outlet } from "react-router-dom";
 import CartIcon from "../../components/cart-icon/cart-icon.component";
 import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
+import { UserContext } from "../../context/user.context";
 import { CartContext } from "../../context/cart.context";
+import { signOutUser } from "../../utils/firebase/firebase.utils";
+import {
+  NavigationContainer,
+  NavLinks,
+  NavLink,
+  LogoContainer,
+} from "./navigation.styles";
+
 const Navigation = () => {
   const { currentUser } = useContext(UserContext);
-  const { cartIsOpen, setcartIsOpen } = useContext(CartContext);
-  const signOutHandler = async () => {
-    return await signOutUser();
-  };
+  const { isCartOpen } = useContext(CartContext);
+
   return (
-    <>
-      <div className="navigation">
-        <Link className="logo-container" to="/">
-          <img src="/crown.svg" alt="" className="logo" />
-        </Link>
-        <div className="nav-links-container">
-          <Link className="nav-link" to="/shop">
-            SHOP
-          </Link>
+    <Fragment>
+      <NavigationContainer>
+        <LogoContainer to="/">
+          <img src="./shopping-bag.svg" alt="" className="logo" />
+        </LogoContainer>
+        <NavLinks>
+          <NavLink to="/shop">SHOP</NavLink>
 
           {currentUser ? (
-            <span className="nav-link" onClick={signOutHandler}>
+            <NavLink as="span" onClick={signOutUser}>
               SIGN OUT
-            </span>
+            </NavLink>
           ) : (
-            <Link className="nav-link" to="/auth">
-              SIGN IN
-            </Link>
+            <NavLink to="/auth">SIGN IN</NavLink>
           )}
-          <div onClick={() => setcartIsOpen(!cartIsOpen)}>
-            <CartIcon />
-          </div>
-        </div>
-        {cartIsOpen && <CartDropdown />}
-      </div>
+          <CartIcon />
+        </NavLinks>
+        {isCartOpen && <CartDropdown />}
+      </NavigationContainer>
       <Outlet />
-    </>
+    </Fragment>
   );
 };
 
