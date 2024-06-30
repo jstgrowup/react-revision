@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 
 const CardList = ({ monsters }) => {
-  console.log("monsters:", monsters);
   return (
     <div>
       {monsters?.map((monster) => {
