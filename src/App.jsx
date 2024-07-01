@@ -4,8 +4,22 @@ import { Routes, Route } from "react-router-dom";
 import Authentication from "./routes/authentication/authentication.component";
 import Shop from "./routes/shop/shop.component";
 import Checkout from "./routes/checkout/checkout.component";
+import {
+  createUserDocumentFromAuth,
+  onAuthStateChangedListener,
+} from "./utils/firebase/firebase.utils";
+import { useEffect } from "react";
 
 function App() {
+  useEffect(() => {
+    const unsubscribe = onAuthStateChangedListener((user) => {
+      if (user) {
+        createUserDocumentFromAuth(user);
+      }
+      return setcurrentUser(user);
+    });
+    return unsubscribe;
+  }, []);
   return (
     <Routes>
       <Route path="/" element={<Navigation />}>
